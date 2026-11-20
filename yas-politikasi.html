@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>21+ Yaş Politikası — JIGGY</title>
+  <meta name="description" content="JIGGY 21+ yaş politikası.">
+  <meta name="theme-color" content="#0a0908">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,400..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap">
+  <link rel="modulepreload" href="assets/js/config.js">
+  <link rel="modulepreload" href="assets/js/i18n.js">
+  <link rel="modulepreload" href="assets/js/products.js">
+  <link rel="modulepreload" href="assets/js/images.js">
+  <link rel="modulepreload" href="assets/js/cart.js">
+  <link rel="modulepreload" href="assets/js/core.js">
+  <link rel="modulepreload" href="assets/js/legal.js">
+  <link rel="stylesheet" href="assets/vendor/lenis.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    document.documentElement.classList.add('js');
+    // style.css sets --ink. Without it the stylesheet never arrived (a dropped request, or a broken cached copy in
+    // an in-app browser) and the page would show as bare HTML: fetch a fresh copy before anything is drawn.
+    if (!getComputedStyle(document.documentElement).getPropertyValue('--ink')) {
+      document.write('<link rel="stylesheet" href="assets/css/style.css?retry=' + Date.now() + '">');
+    }
+  </script>
+</head>
+<body data-page="legal">
+  <main id="main" class="info legal">
+    <nav class="info__nav" aria-label="Kurumsal" data-i18n-attr="aria-label:footer.corp">
+      <p class="eyebrow" data-i18n="footer.corp">Kurumsal</p>
+      <a href="hakkimizda.html" data-i18n="footer.about">Hakkımızda</a>
+      <a href="teslimat-ve-iade.html" data-i18n="footer.delivery">Teslimat ve İade</a>
+      <a href="gizlilik.html" data-i18n="footer.privacy">Gizlilik ve KVKK</a>
+      <a href="mesafeli-satis-sozlesmesi.html" data-i18n="footer.mss">Mesafeli Satış Sözleşmesi</a>
+      <a href="on-bilgilendirme.html" data-i18n="footer.preinfo">Ön Bilgilendirme Formu</a>
+      <a href="yas-politikasi.html" data-i18n="footer.age" class="is-active" aria-current="page">21+ Yaş Politikası</a>
+    </nav>
+
+    <article class="legal__doc" lang="tr">
+        <p class="legal__en" data-lang="en" lang="en">This text is published in Turkish, as Turkish consumer law requires.</p>
+        <h1>21+ Yaş Politikası</h1>
+        <p class="legal__date">Son güncelleme: 19 Kasım 2026</p>
+        <p>JIGGY ürünleri takı ve tütün aksesuarı olarak satılır. Bu yüzden sitemizden yalnızca 21 yaşını doldurmuş kişiler alışveriş yapabilir.</p>
+        <h2>1. Kimler alışveriş yapabilir</h2>
+        <ul><li>Yalnızca 21 yaşını doldurmuş kişiler.</li><li>21 yaşından küçük biri adına ya da ona hediye etmek için sipariş verilemez.</li></ul>
+        <h2>2. Yaşınızı nerede soruyoruz</h2>
+        <ul><li>Siteye ilk girişte: 21 yaşını doldurmadığını söyleyen ziyaretçi siteye giremez.</li><li>Sepette: ödemeye geçmeden önce 21 yaşını doldurduğunuzu onaylarsınız.</li><li>Ödeme sayfasında: siparişi vermeden önce ayrı bir kutuyla 21 yaşını doldurduğunuzu beyan edersiniz. Bu beyan, tarihi ve saatiyle sipariş kaydında saklanır.</li></ul>
+        <h2>3. 21 yaşından küçük birinin siparişi</h2>
+        <ul><li>Siparişi verenin 21 yaşından küçük olduğu anlaşılırsa siparişi iptal eder, ödenen tutarın tamamını en geç 14 gün içinde karta iade ederiz.</li><li>Ürün yola çıktıysa iade kodunu e-postayla göndeririz; geri gönderim ücreti bize aittir.</li></ul>
+        <h2>4. Teslimat</h2>
+        <p>Paketler, içeriği belirtmeyen sade bir dış etiketle gönderilir. Paketi 21 yaşından küçük birinin teslim almamasına dikkat etmenizi rica ederiz.</p>
+        <h2>5. Kişisel veriler</h2>
+        <p>Girişteki yaş onayınız yalnızca tarayıcınızda saklanır, bize gönderilmez. Ödeme sayfasındaki beyanınız sipariş kaydında tutulur. Ayrıntılar <a href="gizlilik.html">Gizlilik ve KVKK</a> sayfasındadır.</p>
+        <h2>6. Bize bildirin</h2>
+        <p>21 yaşından küçük birinin sipariş verdiğini düşünüyorsanız brandjiggy@gmail.com adresine ya da Instagram'dan @thejiggybrand hesabına yazın.</p>
+    </article>
+  </main>
+
+  <div data-footer></div>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/SplitText.min.js"></script>
+  <script src="assets/vendor/CustomEase.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script type="module" src="assets/js/legal.js"></script>
+</body>
+</html>

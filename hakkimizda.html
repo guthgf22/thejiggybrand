@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hakkımızda — JIGGY</title>
+  <meta name="description" content="JIGGY hakkında: geceye takılan yüzük ve küpeler. Satıcı bilgileri ve iletişim.">
+  <meta name="theme-color" content="#0a0908">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,400..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap">
+  <link rel="modulepreload" href="assets/js/config.js">
+  <link rel="modulepreload" href="assets/js/i18n.js">
+  <link rel="modulepreload" href="assets/js/products.js">
+  <link rel="modulepreload" href="assets/js/images.js">
+  <link rel="modulepreload" href="assets/js/cart.js">
+  <link rel="modulepreload" href="assets/js/core.js">
+  <link rel="modulepreload" href="assets/js/legal.js">
+  <link rel="stylesheet" href="assets/vendor/lenis.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    document.documentElement.classList.add('js');
+    // style.css sets --ink. Without it the stylesheet never arrived (a dropped request, or a broken cached copy in
+    // an in-app browser) and the page would show as bare HTML: fetch a fresh copy before anything is drawn.
+    if (!getComputedStyle(document.documentElement).getPropertyValue('--ink')) {
+      document.write('<link rel="stylesheet" href="assets/css/style.css?retry=' + Date.now() + '">');
+    }
+  </script>
+</head>
+<body data-page="legal">
+  <main id="main" class="info legal">
+    <nav class="info__nav" aria-label="Kurumsal" data-i18n-attr="aria-label:footer.corp">
+      <p class="eyebrow" data-i18n="footer.corp">Kurumsal</p>
+      <a href="hakkimizda.html" data-i18n="footer.about" class="is-active" aria-current="page">Hakkımızda</a>
+      <a href="teslimat-ve-iade.html" data-i18n="footer.delivery">Teslimat ve İade</a>
+      <a href="gizlilik.html" data-i18n="footer.privacy">Gizlilik ve KVKK</a>
+      <a href="mesafeli-satis-sozlesmesi.html" data-i18n="footer.mss">Mesafeli Satış Sözleşmesi</a>
+      <a href="on-bilgilendirme.html" data-i18n="footer.preinfo">Ön Bilgilendirme Formu</a>
+      <a href="yas-politikasi.html" data-i18n="footer.age">21+ Yaş Politikası</a>
+    </nav>
+
+    <article class="legal__doc" lang="tr">
+        <h1 lang="tr" data-i18n="footer.about">Hakkımızda</h1>
+        <div class="legal__lede" data-lang="tr">
+          <p>JIGGY, geceye takılan takılar yapan bir marka. Önce stil: elde iddialı duran yüzükler, kulakta tek bir çizgi gibi duran küpeler, saklamaya değer kutular. Her parçayı bir kombinin son dokunuşu olsun diye tasarlıyoruz.</p>
+          <p>Marifetleri de var ama onlar işin bonusu. The Jiggy’nin ön yüzü boydan boya delik, istersen sigaranı da tutar. The Sniffy iki parçalı; ister ikisini birden tak, ister birini. Önce takı, sonra marifet.</p>
+          <p>Yüzükler kraft kutumuzda, küpeler kendi kutusunda, sade bir dış etiketle yola çıkar. Yalnızca 21 yaş üstüne satış yapıyoruz.</p>
+          <p class="legal__sign" lang="en">Stay jiggy.</p>
+        </div>
+        <div class="legal__lede" data-lang="en" lang="en">
+          <p>JIGGY makes jewelry for the night. Style comes first: rings that hold their own on the hand, earrings that sit on the ear like a single clean line, boxes worth keeping. Every piece is designed as the last touch of an outfit.</p>
+          <p>The tricks are a bonus. The Jiggy’s face is drilled clean through, so it can hold your cigarette too. The Sniffy comes in two parts: wear both, or just one. Jewelry first, tricks second.</p>
+          <p>Rings ship in our kraft box, earrings in their own box, always with a plain outer label. We only sell to adults 21+.</p>
+          <p class="legal__sign">Stay jiggy.</p>
+        </div>
+        <h2 data-lang="tr">Satıcı bilgileri</h2>
+        <h2 data-lang="en" lang="en">Seller</h2>
+        <dl class="legal__seller" lang="tr">
+          <div><dt><span data-lang="tr">Satıcı</span><span data-lang="en" lang="en">Seller</span></dt><dd>Mahmut Adıgüzel</dd></div>
+          <div><dt><span data-lang="tr">Adres</span><span data-lang="en" lang="en">Address</span></dt><dd>İstiklal Mah. Alemdağ Cad. Yiğit İş Merkezi No: 184 İç Kapı No: 1, Ümraniye/İstanbul</dd></div>
+          <div><dt><span data-lang="tr">Telefon</span><span data-lang="en" lang="en">Phone</span></dt><dd><a href="tel:+905395651616">0539 565 16 16</a></dd></div>
+          <div><dt><span data-lang="tr">E-posta</span><span data-lang="en" lang="en">Email</span></dt><dd><a href="mailto:brandjiggy@gmail.com">brandjiggy@gmail.com</a></dd></div>
+          <div><dt><span data-lang="tr">Vergi dairesi / no</span><span data-lang="en" lang="en">Tax office / no.</span></dt><dd>Ümraniye Vergi Dairesi, 0080009109</dd></div>
+          <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/thejiggybrand/" target="_blank" rel="noopener">@thejiggybrand</a>, <a href="https://www.instagram.com/cheekyjiggy/" target="_blank" rel="noopener">@cheekyjiggy</a></dd></div>
+        </dl>
+    </article>
+  </main>
+
+  <div data-footer></div>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/SplitText.min.js"></script>
+  <script src="assets/vendor/CustomEase.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script type="module" src="assets/js/legal.js"></script>
+</body>
+</html>

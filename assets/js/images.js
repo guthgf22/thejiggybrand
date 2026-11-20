@@ -1,0 +1,151 @@
+// name: [width, height, smallWidth|null] — files live in assets/img as <name>.webp and <name>-<small>.webp
+export const IMAGES = {
+  'hero-ember': [2400, 1350, 1200],
+  'hero-ember-m2': [1200, 1600, null],
+  'mood-red': [1400, 1750, 700],
+  'mood-pink': [1400, 1750, 700],
+  'mood-blue': [1400, 1750, 700],
+  'mood-green': [1400, 1750, 700],
+  'ring-gold': [1003, 1254, 640],
+  'ring-silver': [1400, 1750, 700],
+  'ring-matte': [1400, 1750, 700],
+  'ring-rose': [1400, 1750, 700],
+  'ring-gold-real': [1400, 1750, 700],
+  'ring-side': [1400, 1751, 700],
+  'ring-stamp': [1400, 1750, 700],
+  'ring-dark': [1003, 1254, 640],
+  // ring-dark with the ring recoloured: the shop cards of Classic, Moon and Blush
+  'ring-dark-brass': [1003, 1254, 640],
+  'ring-dark-silver': [1003, 1254, 640],
+  'ring-dark-rose': [1003, 1254, 640],
+  'ring-laser': [1003, 1254, 640],
+  'ring-laser-silver': [1003, 1254, 640],
+  'ring-red': [1003, 1254, 640],
+  'ring-scale': [1003, 1254, 640],
+  'ring-scale-night': [1254, 1254, 640], // the owner's night shot on the scale (4:20), Nugget gallery
+  'sniffy-ts-rose': [844, 1264, 640], // Times Square, rose Sniffy (the street clip's model), Rose gallery
+  'ring-four': [1254, 1254, 640],
+  'ring-four-box': [1254, 1254, 640],
+  'ring-ashtray': [1003, 1254, 640],
+  'ring-noir': [1200, 1500, 640],
+  'ring-feature': [1200, 1500, 640],
+  'ring-gamer': [1200, 1200, 640],
+  'ring-glow': [1200, 1500, 640],
+  'ring-classic-1': [1100, 1375, 600],
+  'ring-classic-2': [1100, 1375, 600],
+  'ring-classic-3': [1100, 1375, 600],
+  'ring-moon-1': [1200, 1500, 600],
+  'ring-moon-2': [1200, 1500, 600],
+  'ring-moon-3': [1200, 1500, 600],
+  // studio shots on a grey sweep (product page galleries only)
+  'ring-moon-g1': [1120, 1400, 600],
+  'ring-moon-g2': [1120, 1400, 600],
+  'ring-moon-g3': [1120, 1400, 600],
+  'ring-nugget-g1': [1120, 1400, 600],
+  'ring-nugget-g2': [1120, 1400, 600],
+  'ring-nugget-g3': [1120, 1400, 600],
+  'ring-blush-g1': [1120, 1400, 600],
+  'ring-blush-g2': [1120, 1400, 600],
+  'ring-blush-g3': [1120, 1400, 600],
+  'ring-classic-g2': [1120, 1400, 600],
+  'ring-classic-g3': [1120, 1400, 600],
+  // All Silver Jiggy: a velvet shot (ChatGPT, from the Moon studio shot) next to its card ring-laser-silver
+  'ring-allsilver-velvet': [1121, 1403, 640],
+  'sniffy-box-silver': [1120, 1400, 600],
+  'sniffy-box-gold': [1120, 1400, 600],
+  'sniffy-box-rose': [1120, 1400, 600],
+  'bar-silver-g': [1120, 1400, 600],
+  'bar-gold-g2': [1120, 1400, 600],
+  'bar-rose-g2': [1120, 1400, 600],
+  // the silver Sniffy model photos with the bar recoloured to the real gold / rose of the rings
+  'sniffy-ear': [1003, 1254, 640],
+  'sniffy-ear-gold': [1003, 1254, 640],
+  'sniffy-ear-rose': [1003, 1254, 640],
+  'sniffy-box2-gold': [1120, 1400, 600],
+  'sniffy-box2-silver': [1120, 1400, 600],
+  // the boxed pair cropped closer with the two pieces centred (the box runs off the right edge in the shot)
+  'sniffy-box3-rose': [764, 955, 600],
+  'sniffy-box3-silver': [764, 955, 600],
+  'sniffy-box3-gold': [764, 955, 600],
+  'bars-ear-gold': [1003, 1254, 640],
+  'bars-ear-rose': [1003, 1254, 640],
+  'bars-real-gold2': [1066, 1333, 640],
+  'bars-real-rose2': [1066, 1333, 640],
+  'bars-silver': [1003, 1254, 640],
+  'bars-rose': [1003, 1254, 640],
+  'bars-gold': [1400, 1750, 700],
+  'bars-set': [1003, 1254, 640],
+  'sniffy-model': [843, 1054, 640],
+  'sniffy-model-2': [1003, 1254, 640],
+  'bars-ear': [1003, 1254, 640],
+  'bars-ear-box': [1003, 1254, 640],
+  'bars-neon': [1003, 1254, 640],
+  'bars-city': [1003, 1254, 640],
+  'bars-real': [1066, 1333, 640],
+  'bars-real-2': [1066, 1333, 640],
+  'bars-bw': [1003, 1254, 640],
+  'bars-rose-box': [1003, 1254, 640],
+  'jstring-tease': [1024, 678, null],
+  'jstring-poster': [745, 932, 640],
+  'how-1': [1200, 1500, 600],
+  'how-2': [1200, 1500, 600],
+  'how-3': [1200, 1500, 600],
+  // how-3 with the ring recoloured: the hover photo of the Classic, Moon and Blush cards
+  'how-3-brass': [1200, 1500, 600],
+  'how-3-silver': [1200, 1500, 600],
+  'how-3-rose': [1200, 1500, 600],
+  'how-band': [1200, 1500, 600],
+  'lb-smoke': [1800, 1200, 900],
+  'lb-satin': [1148, 1435, 640],
+  'lb-wheel': [1800, 1200, 900],
+  'lb-dog': [768, 1024, null],
+  'lb-dust': [1800, 1200, 900],
+  'lb-bmw': [1200, 1600, 640],
+  'lb-bentley': [1800, 1200, 900],
+  'lb-drum': [1800, 1200, 900],
+  'lb-glove': [1200, 1600, 640],
+  'lb-fist': [1200, 1600, 640],
+  'card-car': [960, 1200, 640],
+  'edit-corset': [1024, 1536, 640],
+  'lb-ashtray': [1800, 1200, 900],
+  'lb-trails': [1200, 1600, 640],
+  'lb-hell': [1800, 1200, 900],
+  'lb-finger': [1800, 1200, 900],
+  'lb-box': [1800, 1200, 900],
+  'kraft-1': [1800, 1200, 900],
+  'kraft-2': [1800, 1200, 900],
+  'kraft-3': [1800, 1200, 900],
+  'lb-boxring': [1800, 1200, 900],
+  'lb-vise': [1800, 1200, 900],
+  'lb-kiss': [1800, 1200, 900],
+  'ugc-1': [900, 900, null],
+  'ugc-2': [900, 900, null],
+  'ugc-3': [900, 900, null],
+  'ugc-4': [900, 900, null],
+  'ugc-5': [900, 900, null],
+  'ugc-6': [900, 900, null],
+  'ugc-7': [900, 900, null],
+  'ugc-8': [900, 900, null],
+  'ugc-9': [900, 900, null],
+  'ugc-sinner': [900, 900, null],
+  'ugc-cheeky': [900, 900, null],
+  'ugc-surf': [900, 900, null],
+};
+
+const BASE = 'assets/img/';
+
+export function src(name, small = false) {
+  const meta = IMAGES[name];
+  if (small && meta && meta[2]) return `${BASE}${name}-${meta[2]}.webp`;
+  return `${BASE}${name}.webp`;
+}
+
+// Returns an <img> string with srcset, intrinsic size and lazy loading.
+export function pic(name, { alt = '', cls = '', sizes = '100vw', eager = false, attrs = '' } = {}) {
+  const meta = IMAGES[name];
+  if (!meta) return '';
+  const [w, h, sw] = meta;
+  const srcset = sw ? `srcset="${BASE}${name}-${sw}.webp ${sw}w, ${BASE}${name}.webp ${w}w" sizes="${sizes}"` : '';
+  const loading = eager ? 'fetchpriority="high"' : 'loading="lazy"';
+  return `<img src="${BASE}${name}.webp" ${srcset} width="${w}" height="${h}" alt="${alt}" class="${cls}" ${loading} decoding="async" ${attrs}>`;
+}

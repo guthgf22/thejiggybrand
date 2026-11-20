@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="meta.title.shop">Mağaza — JIGGY</title>
+  <meta name="description" content="JIGGY mağazası: Classic, Moon, Nugget ve Blush Jiggy yüzükler, Sniffy küpeler ve yakında J-String.">
+  <meta name="theme-color" content="#0a0908">
+  <meta property="og:title" content="Mağaza — JIGGY">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:image" content="https://thejiggybrand.vercel.app/assets/img/og.jpg">
+  <meta property="og:url" content="https://thejiggybrand.vercel.app/shop.html">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,400..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap">
+  <link rel="modulepreload" href="assets/js/config.js">
+  <link rel="modulepreload" href="assets/js/i18n.js">
+  <link rel="modulepreload" href="assets/js/products.js">
+  <link rel="modulepreload" href="assets/js/images.js">
+  <link rel="modulepreload" href="assets/js/cart.js">
+  <link rel="modulepreload" href="assets/js/core.js">
+  <link rel="modulepreload" href="assets/js/cards.js">
+  <link rel="modulepreload" href="assets/js/shop.js">
+  <link rel="stylesheet" href="assets/vendor/lenis.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    document.documentElement.classList.add('js');
+    // The weighing scale opens only the first page of a visit (or a tap on the logo): other pages hide it before the first paint.
+    try { if (sessionStorage.getItem('jiggy.session') && !sessionStorage.getItem('jiggy.scale')) document.documentElement.classList.add('no-loader'); } catch (e) { /* ignore */ }
+    // style.css sets --ink. Without it the stylesheet never arrived (a dropped request, or a broken cached copy in
+    // an in-app browser) and the page would show as bare HTML: fetch a fresh copy before anything is drawn.
+    if (!getComputedStyle(document.documentElement).getPropertyValue('--ink')) {
+      document.write('<link rel="stylesheet" href="assets/css/style.css?retry=' + Date.now() + '">');
+    }
+  </script>
+</head>
+<body data-page="shop">
+  <div class="loader" aria-hidden="true">
+    <div class="loader__scale">
+      <div class="loader__plate"></div>
+      <div class="loader__row">
+        <span class="loader__key">M</span>
+        <div class="lcd-panel">
+          <span class="lcd"><span class="lcd__ghost">8.88</span><span class="lcd__val">0.00</span></span>
+          <span class="lcd__unit">g</span>
+        </div>
+        <span class="loader__key">T</span>
+      </div>
+    </div>
+    <p class="loader__msg" data-i18n="loader.msg">Vibe tartılıyor</p>
+  </div>
+  <main id="main" class="shop">
+    <header class="shop__head">
+      <h1 class="shop__title"><span data-i18n="shop.title" data-split>Mağaza</span><sup data-shop-count></sup></h1>
+      <div class="shop__side" data-reveal="stagger">
+        <p class="lede" data-i18n="shop.intro">Gece için tasarlanmış parçalar. Rengini seç, gerisini bize bırak.</p>
+        <div class="filters" role="group" aria-label="Filtre">
+          <button class="chip" type="button" data-filter="all" aria-pressed="true" data-i18n="shop.filter.all">Tümü</button>
+          <button class="chip" type="button" data-filter="rings" aria-pressed="false" data-i18n="shop.filter.rings">Yüzükler</button>
+          <button class="chip" type="button" data-filter="earrings" aria-pressed="false" data-i18n="shop.filter.earrings">Küpeler</button>
+          <button class="chip" type="button" data-filter="underwear" aria-pressed="false" data-i18n="shop.filter.underwear">İç giyim</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="shop__grid" data-grid></div>
+
+    <section class="shop__banner">
+      <div class="shop__banner-media" data-clip>
+        <img src="assets/img/ring-four.webp" srcset="assets/img/ring-four-640.webp 640w, assets/img/ring-four.webp 1254w" sizes="(max-width: 860px) 100vw, 50vw" width="1254" height="1254" alt="Moon, Nugget, Blush ve Classic Jiggy yüzükler" loading="lazy" decoding="async">
+      </div>
+      <div class="shop__banner-copy">
+        <p class="eyebrow" lang="en">No.01 · The Jiggy</p>
+        <h2 class="sec-title" data-split data-i18n="shop.banner.title">Kararsız mı kaldın? Gülen suratla başla.</h2>
+        <div><a class="btn" href="product.html?id=the-j&amp;v=classic" data-magnetic><span class="btn__roll" data-i18n="shop.banner.cta" data-i18n-attr="data-text:shop.banner.cta" data-text="CLASSIC JIGGY ile başla">CLASSIC JIGGY ile başla</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </section>
+  </main>
+
+  <div data-footer></div>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/SplitText.min.js"></script>
+  <script src="assets/vendor/CustomEase.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script type="module" src="assets/js/shop.js"></script>
+</body>
+</html>

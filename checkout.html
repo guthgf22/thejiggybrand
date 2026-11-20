@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="meta.title.checkout">Ödeme — JIGGY</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0a0908">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,400..900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap">
+  <link rel="modulepreload" href="assets/js/config.js">
+  <link rel="modulepreload" href="assets/js/i18n.js">
+  <link rel="modulepreload" href="assets/js/products.js">
+  <link rel="modulepreload" href="assets/js/images.js">
+  <link rel="modulepreload" href="assets/js/cart.js">
+  <link rel="modulepreload" href="assets/js/core.js">
+  <link rel="modulepreload" href="assets/js/checkout.js">
+  <link rel="stylesheet" href="assets/vendor/lenis.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    document.documentElement.classList.add('js');
+    // style.css sets --ink. Without it the stylesheet never arrived (a dropped request, or a broken cached copy in
+    // an in-app browser) and the page would show as bare HTML: fetch a fresh copy before anything is drawn.
+    if (!getComputedStyle(document.documentElement).getPropertyValue('--ink')) {
+      document.write('<link rel="stylesheet" href="assets/css/style.css?retry=' + Date.now() + '">');
+    }
+  </script>
+</head>
+<body data-page="checkout">
+  <main id="main" data-co>
+    <div class="co" data-co-main>
+      <form class="co__form" novalidate data-form>
+        <div><button type="button" class="link-arrow" data-cart-open>← <span data-i18n="co.back">Sepete dön</span></button></div>
+        <h1 class="co__title" data-i18n="co.title">Ödeme</h1>
+
+        <section class="co__block">
+          <h2><span>01</span><b data-i18n="co.contact">İletişim</b></h2>
+          <div class="fields">
+            <div class="field field--full"><label for="f-email"><span data-i18n="co.email">E-posta</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field field--full"><label for="f-phone"><span data-i18n="co.phone">Telefon</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required></div>
+          </div>
+        </section>
+
+        <section class="co__block">
+          <h2><span>02</span><b data-i18n="co.delivery">Teslimat</b></h2>
+          <div class="fields">
+            <div class="field"><label for="f-first"><span data-i18n="co.first">Ad</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-first" name="first" autocomplete="given-name" required></div>
+            <div class="field"><label for="f-last"><span data-i18n="co.last">Soyad</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-last" name="last" autocomplete="family-name" required></div>
+            <div class="field field--full"><label for="f-address"><span data-i18n="co.address">Adres</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-address" name="address" autocomplete="street-address" required></div>
+            <div class="field"><label for="f-city"><span data-i18n="co.city">Şehir</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-city" name="city" autocomplete="address-level2" required></div>
+            <div class="field"><label for="f-zip"><span data-i18n="co.zip">Posta kodu</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-zip" name="zip" autocomplete="postal-code" required></div>
+            <div class="field field--full"><label for="f-country"><span data-i18n="co.country">Ülke</span><em data-i18n="co.required">Zorunlu</em></label>
+              <select id="f-country" name="country" autocomplete="country" required>
+                <option value="TR">Türkiye</option>
+              </select>
+            </div>
+          </div>
+          <p class="eyebrow" data-i18n="co.method">Kargo seçeneği</p>
+          <div class="radios" data-methods>
+            <label class="radio"><input type="radio" name="method" value="standard" checked><span><b data-i18n="co.standard">Standart</b><small data-i18n="co.standard.d">2–5 iş günü</small></span><span class="radio__price" data-rate="standard"></span></label>
+            <label class="radio"><input type="radio" name="method" value="express"><span><b data-i18n="co.express">Hızlı</b><small data-i18n="co.express.d">1–2 iş günü</small></span><span class="radio__price" data-rate="express"></span></label>
+          </div>
+        </section>
+
+        <section class="co__block">
+          <h2><span>03</span><b data-i18n="co.payment">Ödeme</b></h2>
+          <div class="paynote">
+            <svg class="smile" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l10 10M26 18L16 28M38 18l10 10M48 18L38 28"/><path d="M12 38c6 12 34 12 40 0"/></svg>
+            <p data-paynote></p>
+          </div>
+          <img class="co__pay" src="assets/img/pay/iyzico-band-white.svg" width="456" height="32" alt="iyzico ile Öde: Mastercard, Visa, American Express, Troy" data-i18n-attr="alt:footer.pay" loading="lazy" decoding="async">
+          <details class="co__docs" data-docs>
+            <summary data-i18n="co.docs">Sözleşmeleri oku</summary>
+            <div class="co__docs-body" data-docs-body data-lenis-prevent lang="tr">
+              <div data-docs-order></div>
+              <p data-docs-links><a href="on-bilgilendirme.html" target="_blank" rel="noopener">Ön Bilgilendirme Formu</a> · <a href="mesafeli-satis-sozlesmesi.html" target="_blank" rel="noopener">Mesafeli Satış Sözleşmesi</a></p>
+            </div>
+          </details>
+          <label class="check" data-check="terms"><input type="checkbox" name="terms" required><span data-i18n-html="co.terms"><a href="on-bilgilendirme.html" target="_blank" rel="noopener">Ön Bilgilendirme Formu</a>’nu ve <a href="mesafeli-satis-sozlesmesi.html" target="_blank" rel="noopener">Mesafeli Satış Sözleşmesi</a>’ni okudum, onaylıyorum.</span></label>
+          <label class="check" data-check="age"><input type="checkbox" name="age" required><span data-i18n-html="co.age">21 yaşını doldurdum, bu siparişi 21 yaşından küçük biri için vermiyorum. (<a href="yas-politikasi.html" target="_blank" rel="noopener">21+ Yaş Politikası</a>)</span></label>
+          <p class="co__age-error" data-co-age-error hidden data-i18n="co.age.error">Sipariş vermek için 21 yaşını doldurduğunu onayla.</p>
+          <p class="co__kvkk" data-i18n-html="co.kvkk">Kişisel verilerin <a href="gizlilik.html" target="_blank" rel="noopener">Gizlilik ve KVKK Aydınlatma Metni</a> kapsamında işlenir.</p>
+          <button type="submit" class="btn btn--wide" data-magnetic="0.08"><span class="btn__roll" data-place></span></button>
+        </section>
+      </form>
+
+      <aside class="co__summary">
+        <div class="co__sticky">
+          <p class="eyebrow" data-i18n="co.summary">Sipariş özeti</p>
+          <div class="co__lines" data-co-lines></div>
+          <div class="co__totals">
+            <div class="co__set" data-co-set hidden><span data-i18n="cart.set">Set indirimi</span><span data-co-off></span></div>
+            <div><span data-i18n="co.subtotal">Ara toplam</span><span data-co-sub></span></div>
+            <div><span data-i18n="co.shipping">Kargo</span><span data-co-ship></span></div>
+            <div class="co__grand"><span data-i18n="co.total">Toplam</span><strong data-co-total></strong></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/SplitText.min.js"></script>
+  <script src="assets/vendor/CustomEase.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script type="module" src="assets/js/checkout.js"></script>
+</body>
+</html>
