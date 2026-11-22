@@ -95,9 +95,9 @@ export const PRODUCTS = [
       // Each colour shows its own photos, and the three cards are one set: the owner's ear shot and the model shot (hover)
       // in silver as shot, and in gold and rose with only the bar recoloured to the real gold / rose of the rings. The boxed
       // pair leads only for "channel only", which has no photo of its own.
-      { id: 'silver', name: 'Silver Sniffy', material: M.SILVER_925, label: { en: 'Silver', tr: 'Gümüş' }, image: 'sniffy-ear', hover: 'bars-real', gallery: ['bar-silver-g', 'bars-real', 'sniffy-model', 'sniffy-box4-silver'], partShots: { bar: 'bar-silver-g', channel: 'sniffy-box4-silver' }, swatch: SILVER },
-      { id: 'gold', name: 'Gold Sniffy', material: M.SILVER_GOLD, label: { en: 'Gold', tr: 'Altın' }, image: 'sniffy-ear-gold', hover: 'bars-real-gold2', gallery: ['bar-gold-g2', 'bars-real-gold2', 'sniffy-box4-gold', 'bars-gold'], partShots: { bar: 'bar-gold-g2', channel: 'sniffy-box4-gold' }, swatch: GOLD },
-      { id: 'rose', name: 'Rose Sniffy', material: M.SILVER_ROSE, label: { en: 'Rose', tr: 'Rose' }, image: 'sniffy-ear-rose', hover: 'bars-real-rose2', gallery: ['bar-rose-g2', 'bars-real-rose2', 'sniffy-ts-rose', 'sniffy-box4-rose'], partShots: { bar: 'bar-rose-g2', channel: 'sniffy-box4-rose' }, swatch: ROSE },
+      { id: 'silver', name: 'Silver Sniffy', material: M.SILVER_925, label: { en: 'Silver', tr: 'Gümüş' }, image: 'sniffy-ear', hover: 'bars-real', gallery: ['bar-silver-g', 'bars-real', 'sniffy-model', 'sniffy-box5-silver'], partShots: { bar: 'bar-silver-g', channel: 'sniffy-box5-silver' }, swatch: SILVER },
+      { id: 'gold', name: 'Gold Sniffy', material: M.SILVER_GOLD, label: { en: 'Gold', tr: 'Altın' }, image: 'sniffy-ear-gold', hover: 'bars-real-gold2', gallery: ['bar-gold-g2', 'bars-real-gold2', 'sniffy-box5-gold', 'bars-gold'], partShots: { bar: 'bar-gold-g2', channel: 'sniffy-box5-gold' }, swatch: GOLD },
+      { id: 'rose', name: 'Rose Sniffy', material: M.SILVER_ROSE, label: { en: 'Rose', tr: 'Rose' }, image: 'sniffy-ear-rose', hover: 'bars-real-rose2', gallery: ['bar-rose-g2', 'bars-real-rose2', 'sniffy-ts-rose', 'sniffy-box5-rose'], partShots: { bar: 'bar-rose-g2', channel: 'sniffy-box5-rose' }, swatch: ROSE },
     ],
     sizes: null,
     sizeNote: { en: 'Pair: 1 hollow bar + 1 open channel. The pieces are also sold on their own.', tr: 'Çift: 1 içi boş çubuk + 1 açık kanal. Parçalar tek tek de satılır.' },
