@@ -430,7 +430,8 @@ html.has-cursor input, html.has-cursor textarea { cursor: text !important; }
 .drawer__age { display: grid; gap: 10px; padding: 14px; border: 1px solid var(--line-2); border-radius: var(--radius); }
 .drawer__age > p:first-child { font-size: 13px; line-height: 1.45; color: var(--bone-2); }
 .drawer__age .check { color: var(--bone); font-size: 15px; font-weight: 600; }
-.drawer__age-error, .co__age-error { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ember); }
+.drawer__age-error, .co__age-error, .co__pay-error { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ember); }
+.co__pay-error { font-size: 13px; line-height: 1.5; }
 
 /* ------------------------------------------------------------- footer */
 

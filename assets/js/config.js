@@ -24,7 +24,11 @@ export const CONFIG = {
   checkout: {
     // 'demo'     → shows a confirmation screen, nothing is charged (for testing).
     // 'whatsapp' → opens WhatsApp with the full order for the number below.
+    // 'iyzico'   → card payment on iyzico's page. It runs on payHost only (the address iyzico approved, where the
+    //              keys are set); the other copies of the site send the customer there with the bag.
+    // checkout.html?odeme=test turns iyzico on for that visit while the mode is still 'demo'.
     mode: 'demo',
     whatsapp: '', // international format without +, e.g. '905551112233'
+    payHost: 'https://thejiggybrand.vercel.app',
   },
 };

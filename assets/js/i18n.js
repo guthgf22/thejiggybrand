@@ -212,6 +212,10 @@ const DICT = {
     'co.payment': 'Payment',
     'co.pay.demo': 'Demo checkout — no card is charged. Connect a payment provider before going live.',
     'co.pay.whatsapp': 'We confirm your order and send payment details on WhatsApp.',
+    'co.pay.iyzico': 'You pay on iyzico’s secure page; your card details never reach us.',
+    'co.pay.error': 'The payment page didn’t open. Try again in a moment.',
+    'co.pay.failed': 'The payment didn’t go through and your card wasn’t charged. Your details are still here, so you can try again.',
+    'co.pay.unknown': 'We couldn’t confirm the payment. If your card was charged, write to us at {email} and we’ll sort it out.',
     'co.summary': 'Order summary',
     'co.subtotal': 'Subtotal',
     'co.shipping': 'Shipping',
@@ -230,6 +234,8 @@ const DICT = {
     'co.success.wa.title': 'Almost there.',
     'co.success.wa.text': 'Order {id} is ready. Send it to us on WhatsApp and we’ll confirm payment and delivery there.',
     'co.success.wa.cta': 'Send on WhatsApp',
+    'co.success.paid.title': 'Order in.',
+    'co.success.paid.text': 'Payment for order {id} went through. We’re getting your package ready.',
     'co.success.cta': 'Back to the shop',
     'co.required': 'Required',
     'co.invalid.email': 'That email looks off.',
@@ -445,6 +451,10 @@ const DICT = {
     'co.payment': 'Ödeme',
     'co.pay.demo': 'Bu bir deneme ödemesi, kartından para çekilmez.',
     'co.pay.whatsapp': 'Siparişini WhatsApp’tan onaylıyor, ödeme bilgilerini oradan iletiyoruz.',
+    'co.pay.iyzico': 'Ödemeyi iyzico’nun güvenli sayfasında yaparsın; kart bilgilerin bize gelmez.',
+    'co.pay.error': 'Ödeme sayfası açılamadı. Birazdan tekrar dene.',
+    'co.pay.failed': 'Ödeme tamamlanmadı, kartından para çekilmedi. Bilgilerin duruyor, tekrar deneyebilirsin.',
+    'co.pay.unknown': 'Ödemenin sonucunu doğrulayamadık. Kartından çekim olduysa {email} adresine yaz, hemen bakalım.',
     'co.summary': 'Sipariş özeti',
     'co.subtotal': 'Ara toplam',
     'co.shipping': 'Kargo',
@@ -463,6 +473,8 @@ const DICT = {
     'co.success.wa.title': 'Az kaldı.',
     'co.success.wa.text': '{id} numaralı siparişin hazır. WhatsApp’tan bize gönder, ödeme ve teslimatı oradan onaylayalım.',
     'co.success.wa.cta': 'WhatsApp’tan gönder',
+    'co.success.paid.title': 'Siparişin alındı.',
+    'co.success.paid.text': '{id} numaralı siparişinin ödemesi tamam. Paketini hazırlamaya başlıyoruz.',
     'co.success.cta': 'Mağazaya dön',
     'co.required': 'Zorunlu',
     'co.invalid.email': 'E-posta adresini kontrol et.',
@@ -500,13 +512,21 @@ export function L(obj) {
   return obj[lang] ?? obj.en;
 }
 
-export const currency = CONFIG.currency[lang];
+// A page can ask for one currency whatever the language: the checkout charges in lira (iyzico, and the agreements
+// say TL), so checkout.html carries data-currency="TRY".
+export const currency = document.documentElement.dataset.currency || CONFIG.currency[lang];
 const priceKey = currency === 'TRY' ? 'try' : 'usd';
-const nf = new Intl.NumberFormat(lang === 'tr' ? 'tr-TR' : 'en-US', {
-  style: 'currency',
-  currency,
-  maximumFractionDigits: 0,
-});
+const nf = (() => {
+  const locale = lang === 'tr' ? 'tr-TR' : 'en-US';
+  const opts = { style: 'currency', currency, maximumFractionDigits: 0 };
+  // Lira in English reads "TRY 1,650" by default; the narrow sign gives ₺1,650. Browsers too old for it get the default.
+  if (currency !== 'TRY' || lang === 'tr') return new Intl.NumberFormat(locale, opts);
+  try {
+    return new Intl.NumberFormat(locale, { ...opts, currencyDisplay: 'narrowSymbol' });
+  } catch (e) {
+    return new Intl.NumberFormat(locale, opts);
+  }
+})();
 
 // amount can be a {usd, try} object or a plain number already in the active currency.
 export function amountOf(price) {

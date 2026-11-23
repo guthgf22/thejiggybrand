@@ -1,5 +1,5 @@
 import { boot, $, $$, reduced, SMILE, ARROW, variantLabel, lineName, lineImage, scrollToTarget } from './core.js';
-import { t, L, money, amountOf } from './i18n.js';
+import { t, lang, money, amountOf } from './i18n.js';
 import { CONFIG } from './config.js';
 import { cart } from './cart.js';
 import { getProduct } from './products.js';
@@ -13,7 +13,28 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const docs = $('[data-docs]');
 const docsBody = $('[data-docs-body]');
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
-$('[data-paynote]').textContent = t(CONFIG.checkout.mode === 'whatsapp' ? 'co.pay.whatsapp' : 'co.pay.demo');
+const payError = $('[data-co-pay-error]');
+const submitBtn = $('button[type="submit"]', form);
+const params = new URLSearchParams(location.search);
+const ID_RE = /^JG-\d{6}$/;
+
+// How this checkout takes the order (config.js). checkout.html?odeme=test switches card payment on for the rest of the
+// visit, so it can be tried on the live site before it is on for everyone.
+let testPay = false;
+try {
+  if (params.get('odeme') === 'test') sessionStorage.setItem('jiggy.pay.test', '1');
+  testPay = sessionStorage.getItem('jiggy.pay.test') === '1';
+} catch (e) { /* storage blocked */ }
+const MODE = testPay ? 'iyzico' : CONFIG.checkout.mode;
+// Card payments run where the keys are: the copy at payHost (and this computer, for tests). Another copy of the site
+// sends the customer there with the bag, before anything is drawn.
+const PAY_HERE = location.origin === CONFIG.checkout.payHost || ['localhost', '127.0.0.1'].includes(location.hostname);
+if (MODE === 'iyzico' && !PAY_HERE && cart.lines.length) {
+  const bag = cart.lines.map(({ id, variant, size, part, qty }) => ({ id, variant, size, part, qty }));
+  location.replace(`${CONFIG.checkout.payHost}/checkout.html${testPay ? '?odeme=test' : ''}#bag=${encodeURIComponent(JSON.stringify(bag))}`);
+  await new Promise(() => {}); // the page is leaving
+}
+$('[data-paynote]').textContent = t({ whatsapp: 'co.pay.whatsapp', iyzico: 'co.pay.iyzico' }[MODE] || 'co.pay.demo');
 
 const method = () => form.querySelector('input[name="method"]:checked').value;
 
@@ -116,10 +137,10 @@ function orderText(id, data) {
   ].join('\n');
 }
 
-// waUrl is set in WhatsApp mode: the order only reaches the brand once the customer sends that message.
-function success(id, waUrl) {
-  const kind = waUrl ? 'wa' : 'demo';
-  const cta = waUrl
+// The thank-you screen. kind: 'paid' (iyzico took the payment), 'wa' (the order only reaches the brand once the
+// customer sends the WhatsApp message at waUrl) or 'demo'.
+function success(id, kind, waUrl) {
+  const cta = kind === 'wa'
     ? `<a class="btn" href="${waUrl}" target="_blank" rel="noopener"><span class="btn__roll" data-text="${t('co.success.wa.cta')}">${t('co.success.wa.cta')}</span>${ARROW}</a>`
     : `<a class="btn" href="shop.html"><span class="btn__roll" data-text="${t('co.success.cta')}">${t('co.success.cta')}</span>${ARROW}</a>`;
   root.innerHTML = `
@@ -130,6 +151,9 @@ function success(id, waUrl) {
       <p>${t(`co.success.${kind}.text`, { id })}</p>
       ${cta}
     </div>`;
+}
+
+function animateDone() {
   scrollToTarget(0, { immediate: true });
   if (!reduced) {
     gsap.from('.co__done > *', { y: 40, opacity: 0, duration: 1, ease: 'jig', stagger: 0.08 });
@@ -211,9 +235,80 @@ form.addEventListener('change', (e) => {
   }
 });
 
+// Payment messages above the button (key null: none).
+function showPayError(key) {
+  payError.textContent = key ? t(key, { email: CONFIG.email }) : '';
+  payError.hidden = !key;
+}
+
+// What the customer typed survives the trip to iyzico's page and back (a declined card, the back button), in this tab
+// only. The two boxes are not kept: they are ticked again for every try.
+const FORM_KEY = 'jiggy.co.form';
+const KEPT = ['email', 'phone', 'first', 'last', 'address', 'city', 'zip'];
+
+function keepForm() {
+  try {
+    sessionStorage.setItem(FORM_KEY, JSON.stringify({ ...Object.fromEntries(KEPT.map((k) => [k, form.elements[k].value])), method: method() }));
+  } catch (e) { /* storage blocked */ }
+}
+
+function restoreForm() {
+  let saved = null;
+  try { saved = JSON.parse(sessionStorage.getItem(FORM_KEY) || 'null'); } catch (e) { /* ignore */ }
+  if (!saved) return;
+  KEPT.forEach((k) => { if (typeof saved[k] === 'string' && !form.elements[k].value) form.elements[k].value = saved[k]; });
+  const radio = [...form.elements.method].find((r) => r.value === saved.method);
+  if (radio) radio.checked = true;
+}
+
+function forgetForm() {
+  try { sessionStorage.removeItem(FORM_KEY); } catch (e) { /* ignore */ }
+}
+
+let busy = false;
+function setBusy(on) {
+  busy = on;
+  submitBtn.disabled = on;
+}
+
+// The server prices the bag again, checks both boxes and asks iyzico for a payment page; the customer goes there.
+async function pay() {
+  setBusy(true);
+  showPayError(null);
+  const f = form.elements;
+  const order = {
+    lang,
+    method: method(),
+    terms: f.terms.checked,
+    age: f.age.checked,
+    lines: cart.lines.map(({ id, variant, size, part, qty }) => ({ id, variant, size, part, qty })),
+    buyer: { ...Object.fromEntries(KEPT.map((k) => [k, f[k].value])), country: f.country.value },
+  };
+  try {
+    const res = await fetch('api/pay', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(order) });
+    const out = await res.json().catch(() => ({}));
+    if (res.ok && out.url) {
+      keepForm();
+      location.assign(out.url);
+      return; // the button stays off while the browser leaves
+    }
+  } catch (e) { /* offline, or the server didn't answer: same message */ }
+  setBusy(false);
+  showPayError('co.pay.error');
+}
+
+// Back from iyzico's page with the back button, the page can come back exactly as it was left, button off.
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) setBusy(false);
+});
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  if (!validate()) return;
+  if (busy || !validate()) return;
+  if (MODE === 'iyzico') {
+    pay();
+    return;
+  }
   const data = Object.fromEntries(new FormData(form).entries());
   data.country = $('#f-country').selectedOptions[0].textContent;
   const id = `JG-${String(Date.now()).slice(-6)}`;
@@ -222,15 +317,31 @@ form.addEventListener('submit', (e) => {
     : null;
   stopRendering();
   cart.clear();
-  success(id, waUrl);
+  success(id, waUrl ? 'wa' : 'demo', waUrl);
+  animateDone();
 });
 
-// The order is placed once: after that the thank-you screen stays whatever happens to the bag.
-const stopRendering = cart.subscribe(render);
+// Back from iyzico (api/pay/done): ?paid=<order> after a payment iyzico confirmed, ?failed=<order> when no money was
+// taken, ?unknown=<order> when the result couldn't be read.
+const paidId = ID_RE.test(params.get('paid') || '') ? params.get('paid') : null;
+const returned = ['failed', 'unknown'].find((k) => ID_RE.test(params.get(k) || ''));
 
-render();
+// The order is placed once: after that the thank-you screen stays whatever happens to the bag.
+let stopRendering = () => {};
+if (paidId) {
+  cart.clear();
+  forgetForm();
+  success(paidId, 'paid');
+} else {
+  restoreForm();
+  stopRendering = cart.subscribe(render);
+  render();
+  if (returned) showPayError(returned === 'failed' ? 'co.pay.failed' : 'co.pay.unknown');
+}
 await boot();
-if (!reduced && !main.hidden) {
+if (paidId) animateDone();
+else if (returned && !main.hidden) scrollToTarget(payError.closest('.co__block'), { offset: -100 });
+else if (!reduced && !main.hidden) {
   gsap.from('.co__form > *', { y: 40, opacity: 0, duration: 1, ease: 'jig', stagger: 0.07 });
   gsap.from('.co__sticky > *', { y: 30, opacity: 0, duration: 1, ease: 'jig', stagger: 0.07, delay: 0.2 });
 }

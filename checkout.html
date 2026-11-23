@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-currency="TRY">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -26,6 +26,12 @@
     if (!getComputedStyle(document.documentElement).getPropertyValue('--ink')) {
       document.write('<link rel="stylesheet" href="assets/css/style.css?retry=' + Date.now() + '">');
     }
+    // A bag handed over from another copy of the site (payments run here, see config.js) replaces this one, before
+    // the bag is read; cart.js then drops anything in it that can't be bought.
+    if (location.hash.indexOf('#bag=') === 0) {
+      try { localStorage.setItem('jiggy.cart.v1', decodeURIComponent(location.hash.slice(5))); } catch (e) {}
+      history.replaceState(null, '', location.pathname + location.search);
+    }
   </script>
 </head>
 <body data-page="checkout">
@@ -38,19 +44,19 @@
         <section class="co__block">
           <h2><span>01</span><b data-i18n="co.contact">İletişim</b></h2>
           <div class="fields">
-            <div class="field field--full"><label for="f-email"><span data-i18n="co.email">E-posta</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
-            <div class="field field--full"><label for="f-phone"><span data-i18n="co.phone">Telefon</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required></div>
+            <div class="field field--full"><label for="f-email"><span data-i18n="co.email">E-posta</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-email" name="email" maxlength="100" type="email" autocomplete="email" required></div>
+            <div class="field field--full"><label for="f-phone"><span data-i18n="co.phone">Telefon</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-phone" name="phone" maxlength="30" type="tel" autocomplete="tel" required></div>
           </div>
         </section>
 
         <section class="co__block">
           <h2><span>02</span><b data-i18n="co.delivery">Teslimat</b></h2>
           <div class="fields">
-            <div class="field"><label for="f-first"><span data-i18n="co.first">Ad</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-first" name="first" autocomplete="given-name" required></div>
-            <div class="field"><label for="f-last"><span data-i18n="co.last">Soyad</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-last" name="last" autocomplete="family-name" required></div>
-            <div class="field field--full"><label for="f-address"><span data-i18n="co.address">Adres</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-address" name="address" autocomplete="street-address" required></div>
-            <div class="field"><label for="f-city"><span data-i18n="co.city">Şehir</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-city" name="city" autocomplete="address-level2" required></div>
-            <div class="field"><label for="f-zip"><span data-i18n="co.zip">Posta kodu</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-zip" name="zip" autocomplete="postal-code" required></div>
+            <div class="field"><label for="f-first"><span data-i18n="co.first">Ad</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-first" name="first" maxlength="50" autocomplete="given-name" required></div>
+            <div class="field"><label for="f-last"><span data-i18n="co.last">Soyad</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-last" name="last" maxlength="50" autocomplete="family-name" required></div>
+            <div class="field field--full"><label for="f-address"><span data-i18n="co.address">Adres</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-address" name="address" maxlength="300" autocomplete="street-address" required></div>
+            <div class="field"><label for="f-city"><span data-i18n="co.city">Şehir</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-city" name="city" maxlength="50" autocomplete="address-level2" required></div>
+            <div class="field"><label for="f-zip"><span data-i18n="co.zip">Posta kodu</span><em data-i18n="co.required">Zorunlu</em></label><input id="f-zip" name="zip" maxlength="10" autocomplete="postal-code" required></div>
             <div class="field field--full"><label for="f-country"><span data-i18n="co.country">Ülke</span><em data-i18n="co.required">Zorunlu</em></label>
               <select id="f-country" name="country" autocomplete="country" required>
                 <option value="TR">Türkiye</option>
@@ -82,6 +88,7 @@
           <label class="check" data-check="age"><input type="checkbox" name="age" required><span data-i18n-html="co.age">21 yaşını doldurdum, bu siparişi 21 yaşından küçük biri için vermiyorum. (<a href="yas-politikasi.html" target="_blank" rel="noopener">21+ Yaş Politikası</a>)</span></label>
           <p class="co__age-error" data-co-age-error hidden data-i18n="co.age.error">Sipariş vermek için 21 yaşını doldurduğunu onayla.</p>
           <p class="co__kvkk" data-i18n-html="co.kvkk">Kişisel verilerin <a href="gizlilik.html" target="_blank" rel="noopener">Gizlilik ve KVKK Aydınlatma Metni</a> kapsamında işlenir.</p>
+          <p class="co__pay-error" data-co-pay-error role="alert" hidden></p>
           <button type="submit" class="btn btn--wide" data-magnetic="0.08"><span class="btn__roll" data-place></span></button>
         </section>
       </form>
