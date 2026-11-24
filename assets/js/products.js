@@ -141,8 +141,25 @@ export const PRODUCTS = [
   },
 ];
 
+// The 1 TL test piece, for trying a real card payment cheaply. It is not in PRODUCTS, so no list, card or product page
+// shows it; it reaches the bag only through a checkout link with #bag=. It ships free, and the server sells it only
+// while the test switch is on there (`bash sunucu/sunucu.sh deneme-ac` / `deneme-kapat`).
+export const TEST_PRODUCT = {
+  id: 'deneme',
+  code: 'TEST',
+  category: 'test',
+  status: 'available',
+  hidden: true,
+  name: { en: 'Test item', tr: 'Deneme ürünü' },
+  tagline: { en: '', tr: '' },
+  price: { usd: 1, try: 1 },
+  variants: [{ id: 'deneme', name: 'Deneme ürünü (1 TL)', label: { en: 'Test', tr: 'Deneme' }, image: 'ring-dark', swatch: '#888' }],
+  sizes: null,
+  gallery: [],
+};
+
 export function getProduct(id) {
-  return PRODUCTS.find((p) => p.id === id);
+  return PRODUCTS.find((p) => p.id === id) || (id === TEST_PRODUCT.id ? TEST_PRODUCT : undefined);
 }
 
 export function getVariant(product, variantId) {

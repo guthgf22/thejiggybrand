@@ -9,7 +9,8 @@ import { cardHTML, bindCards } from './cards.js';
 const { gsap, ScrollTrigger, SplitText } = window;
 const main = $('[data-pdp]');
 const params = new URLSearchParams(location.search);
-const product = getProduct(params.get('id'));
+// The hidden test piece has no page of its own.
+const product = [getProduct(params.get('id'))].find((p) => p && !p.hidden);
 
 // 7-segment readout: pad with "!" (a blank digit in DSEG) behind a row of ghost 8s.
 function lcd(amount) {

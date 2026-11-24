@@ -39,6 +39,8 @@ $('[data-paynote]').textContent = t({ whatsapp: 'co.pay.whatsapp', iyzico: 'co.p
 const method = () => form.querySelector('input[name="method"]:checked').value;
 
 function shippingCost(subtotal) {
+  // the 1 TL test piece on its own ships free (as on the server, api/_lib/order.js)
+  if (cart.lines.length && cart.lines.every((l) => getProduct(l.id)?.hidden)) return 0;
   if (method() === 'standard' && subtotal >= amountOf(CONFIG.freeShipping)) return 0;
   return amountOf(CONFIG.shipping[method()]);
 }
