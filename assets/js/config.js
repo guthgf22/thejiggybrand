@@ -29,6 +29,6 @@ export const CONFIG = {
     // checkout.html?odeme=test turns iyzico on for that visit while the mode is still 'demo'.
     mode: 'demo',
     whatsapp: '', // international format without +, e.g. '905551112233'
-    payHost: 'https://thejiggybrand.vercel.app',
+    payHost: 'https://thejiggybrand.com',
   },
 };
